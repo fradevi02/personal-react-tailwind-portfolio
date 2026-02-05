@@ -3,6 +3,7 @@ import { Home } from "./pages/Home"
 import { NotFound } from "./pages/NotFound"
 import { useState } from "react";
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +17,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <Analytics />
+      <SpeedInsights />
     </>
   )
 }
