@@ -1,7 +1,7 @@
 import { cn } from "../lib/utils";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-
+import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
     { name: "Home", path: "#home" },
@@ -17,7 +17,7 @@ export const NavBar = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.screenY > 10);
+            setIsScrolled(window.scrollY > 10);
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -28,55 +28,77 @@ export const NavBar = () => {
         <nav 
             className={cn(
                 "fixed w-full z-40 transition-all duration-300", 
-                isScrolled ? "py-3 bg-background/80 backdrop-blur-md" : "py-5"
-                )}
-            > 
+                isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-sm" : "py-5"
+            )}
+        > 
+            <div className="container flex items-center justify-between">
+                
+                {/* LOGO */}
+                <a className="text-xl font-medium flex items-center gap-2" href="#home">
+                    <span className="text-xl font-bold">Francesco De Vito</span>
+                    <span className="text-glow text-foreground hidden sm:inline">Portfolio</span>
+                </a>
 
-                <div className="container flex items-center justify-between">
-                    <a className="text-xl font-medium items-center" href="#home">
-                        <span className="text-xl font-bold">Francesco De Vito </span>
-                        <span className="text-glow text-foreground">
-                            Portfolio
-                        </span>
-                    </a>
-
-
-                    {/* desktop version */}
-                    <div className="hidden md:flex space-x-2">
-                        {navItems.map((item, key) => (
-                            <a 
-                                key={key}
-                                href={item.path}
-                                className="ml-6 text-lg font-medium text-foreground hover:text-primary transition-colors duration-300"
-                            >
-                                {item.name}
-                            </a>
-                        ))}
+                {/* DESKTOP VERSION */}
+                {/* Flex container per link + toggle */}
+                <div className="hidden md:flex items-center space-x-6">
+                    {navItems.map((item, key) => (
+                        <a 
+                            key={key}
+                            href={item.path}
+                            className="text-lg font-medium text-foreground hover:text-primary transition-colors duration-300"
+                        >
+                            {item.name}
+                        </a>
+                    ))}
+                    {/* Aggiunto il Toggle qui per Desktop */}
+                    <div className="pl-4 border-l border-border">
+                        <ThemeToggle />
                     </div>
-                    
+                </div>
+                
 
+                {/* MOBILE VERSION */}
+                <div className="md:hidden flex items-center gap-4">
+                    <ThemeToggle />
 
-                    {/* mobile version */}
-                    <button onClick={() => setIsMobileMenuOpen((prev) => !prev)} className="md:hidden p-2 text-foreground" aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}> {isMobileMenuOpen ? <X size={24}></X> : <Menu size={24}></Menu>} </button>
+                    <button 
+                        onClick={() => setIsMobileMenuOpen((prev) => !prev)} 
+                        className="p-2 text-foreground focus:outline-none" 
+                        aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+                    > 
+                        {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />} 
+                    </button>
+                </div>
 
-                    <div className={cn("fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex items-center justify-center", 
-                        "transition-all duration-300 md:hidden",
-                        isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-                        )}>
-                    <div className="flex flex-col space-y-4 text-xl">
+                {/* MOBILE MENU OVERLAY */}
+                <div className={cn(
+                    "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center", 
+                    "transition-all duration-300 md:hidden",
+                    isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                )}>
+                    <button 
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="absolute top-6 right-6 p-2 text-foreground md:hidden"
+                    >
+                        <X size={28} />
+                    </button>
+
+                    <div className="flex flex-col space-y-8 text-center">
                         {navItems.map((item, key) => (
                             <a 
                                 key={key}
                                 href={item.path}
-                                className="ml-6 text-lg font-medium text-foreground hover:text-primary transition-colors duration-300"
+                                className="text-2xl font-medium text-foreground hover:text-primary transition-colors duration-300"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
                                 {item.name}
                             </a>
                         ))}
                     </div>
-                    </div>
-               </div>
-    
-    </nav>);
+                </div>
+
+           </div>
+        </nav>
+    );
 }
