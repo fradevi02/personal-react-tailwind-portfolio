@@ -24,7 +24,7 @@ export const AboutSection = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
-                            <a href="#contact" className="cosmic-button">
+                            <a href="https://www.linkedin.com/in/francesco-de-vito/" className="cosmic-button">
                                 Get in Touch
                             </a>
 
