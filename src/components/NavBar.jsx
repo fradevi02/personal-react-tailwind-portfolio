@@ -79,10 +79,17 @@ export const NavBar = () => {
 
                 {/* MOBILE MENU OVERLAY */}
                 <div className={cn(
-                    "fixed inset-0 h-screen bg-background z-50 flex flex-col items-center justify-center overflow-y-auto", // <--- Aggiunto overflow-y-auto
+                    "fixed inset-0 h-screen bg-background z-50 flex flex-col items-center justify-center overflow-y-auto",
                     "transition-all duration-300 md:hidden",
                     isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                 )}>
+                    <button 
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="absolute top-5 right-5 p-2 text-foreground hover:text-primary transition-colors focus:outline-none"
+                        aria-label="Close menu"
+                    >
+                        <X size={28} />
+                    </button>
                     <div className="flex flex-col space-y-8 text-center">
                         {navItems.map((item, key) => (
                             <a 
