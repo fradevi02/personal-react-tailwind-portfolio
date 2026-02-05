@@ -1,14 +1,24 @@
 import { ArrowDown } from "lucide-react";
 
-
 export const HeroSection = () => {
     return (
         <section id="home" className="relative min-h-screen flex flex-col items-center justify-center px-4">
             <div className="container max-w-4xl mx-auto text-center z-10">
                 <div className="space-y-6">
+                    
+                    <div className="flex justify-center">
+                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl opacity-0 animate-fade-in">
+                            <img 
+                                src="/profile.png"
+                                alt="Francesco De Vito" 
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                    </div>
+
                     <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-                        <span className="opacity-0 animate-fade-in">Hi, I'm </span>
-                        <span className="text-primary opacity-0 animate-fade-in-delay-1">Francesco </span>
+                        <span className="opacity-0 animate-fade-in-delay-1">Hi, I'm </span>
+                        <span className="text-primary opacity-0 animate-fade-in-delay-2">Francesco </span>
                     </h1>
 
                     <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
