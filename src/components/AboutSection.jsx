@@ -29,7 +29,7 @@ export const AboutSection = () => {
                             </a>
 
                             <a 
-                                href="./src/data/CV - Francesco De Vito.pdf" 
+                                href="./src/data/CV_DeVito.pdf" 
                                 className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300 flex items-center justify-center" 
                                 download
                             >
