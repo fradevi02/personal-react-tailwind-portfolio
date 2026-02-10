@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 // use id for the star, size, x, y, animationDuration and opacity
 //for the meteors, use id, size, x, y, animationDuration and delay
@@ -8,24 +8,7 @@ export const StarBackground = () => {
     const [stars, setStars] = useState([]);
     const [meteors, setMeteors] = useState([]);
 
-    useEffect(() => {
-        generateStars();
-        generateMeteors();
-
-        const handleResize = () => {
-            generateStars();
-            generateMeteors();
-        };
-
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        }
-
-    }, []);
-
-    const generateStars = () => {
+    const generateStars = useCallback(() => {
         // depoend on the screen size, generate a number of stars
         const numStars = Math.floor(window.innerWidth * window.innerHeight / 10000); // 1 star every 1000 pixels (change this value to increase/decrease star density)
         const newStars = [];
@@ -43,11 +26,9 @@ export const StarBackground = () => {
 
         setStars(newStars);
 
-    };
+    }, []);
 
-
-
-    const generateMeteors = () => {
+    const generateMeteors = useCallback(() => {
         // depoend on the screen size, generate a number of stars
         const numMeteors = 4
         const newMeteors = [];
@@ -66,7 +47,24 @@ export const StarBackground = () => {
 
         setMeteors(newMeteors);
 
-    };
+    }, []);
+
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        generateStars();
+        generateMeteors();
+
+        const handleResize = () => {
+            generateStars();
+            generateMeteors();
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        }
+    }, [generateStars, generateMeteors]);
 
 
 
